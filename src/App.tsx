@@ -1,9 +1,11 @@
- import React from 'react'
- 
- const App = () => {
-   return (
-     <div>App</div>
-   )
- }
- 
- export default App
+import AmeyCounter from "./amey/counter/AmeyCounter";
+
+const App = () => {
+  return (
+    <div>
+      <AmeyCounter />
+    </div>
+  );
+};
+
+export default App;
