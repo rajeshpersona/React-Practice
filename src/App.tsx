@@ -4,7 +4,7 @@ import WindowInnerWidth from "./amey/window-innerwidth/WindowInnerWidth";
 const App = () => {
   return (
     <div>
-      <AmeyCounter />
+      {/* <AmeyCounter /> */}
       <WindowInnerWidth />
     </div>
   );
