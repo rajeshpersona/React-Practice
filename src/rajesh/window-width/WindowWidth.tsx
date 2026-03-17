@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useWindowResize } from "../../hook/useWindowResize";
+import { useWindowResize } from "../hook/useWindowResize";
 
 export const WindowWidth = () => {
   const {resizeWidth} = useWindowResize();
