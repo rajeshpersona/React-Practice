@@ -30,8 +30,6 @@ const useWindowInnerWidth = () => {
     };
   }, []);
 
-  console.log(width);
-
   return {
     width,
     view: handleMediaQueries(),
