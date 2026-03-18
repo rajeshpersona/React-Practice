@@ -12,22 +12,22 @@ const Signup = () => {
     e.preventDefault();
 
     // this is to understand what is happening with isValid function
-    // const isValid = (value: string) => {
-    //   if (value === undefined) {
-    //     return false;
-    //   }
-    //   if (value === null) {
-    //     return false;
-    //   }
-    //   if (value === "") {
-    //     return false;
-    //   }
-    //   if (value.trim() === "") {
-    //     return false;
-    //   }
-    //   return true;
-    // };
-    const isValid = (value: string) => value && value.trim() !== "";
+    const isValid = (value: string) => {
+      if (value === undefined) {
+        return false;
+      }
+      if (value === null) {
+        return false;
+      }
+      if (value === "") {
+        return false;
+      }
+      if (value.trim() === "") {
+        return false;
+      }
+      return true;
+    };
+    // const isValid = (value: string) => value && value.trim() !== "";
 
     if (
       isValid(formData.firstName) &&
