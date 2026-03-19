@@ -9,7 +9,7 @@ const Search = () => {
   const getAllProductsApi = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/ruchika/api/product/getAllProducts",
+        "http://localhost:5000/rajesheco/api/product/getAllProducts",
       );
       if (response.ok) {
         const data = await response.json();
@@ -76,12 +76,13 @@ const Search = () => {
         value={searchTerm}
       />
       <div>
-        {deBounce.length > 0 && filteredData.length > 0
-          ? filteredData.map((item) => {
-              return <h2 key={item.id}>{item.title}</h2>;
-            })
-          : ""
-            // <h2>"no products found"</h2>
+        {
+          deBounce.length > 0 && filteredData.length > 0
+            ? filteredData.map((item) => {
+                return <h2 key={item.id}>{item.title}</h2>;
+              })
+            : ""
+          // <h2>"no products found"</h2>
         }
       </div>
     </div>
