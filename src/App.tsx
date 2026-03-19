@@ -1,6 +1,7 @@
 import AmeyCounter from "./amey/counter/AmeyCounter";
+import Filter from "./amey/filters/Filter";
 import Signup from "./amey/forms/Signup";
-import Signup2 from "./amey/forms/Signup2";
+import Signup3 from "./amey/forms/Signup3";
 import Search from "./amey/search/Search";
 import WindowInnerWidth from "./amey/window-innerwidth/WindowInnerWidth";
 import { WindowWidth } from "./rajesh/window-width/WindowWidth";
@@ -12,7 +13,8 @@ const App = () => {
       {/* <WindowInnerWidth /> */}
       {/* <Search /> */}
       {/* <Signup /> */}
-      <Signup2 />
+      <Signup3 />
+      {/* <Filter /> */}
     </div>
   );
 };

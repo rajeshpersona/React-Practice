@@ -17,42 +17,53 @@ const Signup2 = () => {
 
   const handleSignupForm = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    let success = validateForm(formData);
+    const success = validateForm(formData);
     console.log("success", success);
+  };
+
+  const validateName = (fieldName: string, fieldLabel: string) => {
+    // Check if empty
+    if (!fieldName || fieldName.trim() === "") {
+      return `${fieldLabel} is required`;
+    }
+
+    // Check length
+    if (fieldName.length < 2) {
+      return `${fieldLabel} must be at least 2 characters`;
+    }
+    if (fieldName.length > 10) {
+      return `${fieldLabel} must be less than 10 characters`;
+    }
+
+    // Check letters only
+    const onlyLetters = /^[A-Za-z\s]+$/;
+    if (!onlyLetters.test(fieldName)) {
+      return `${fieldLabel} should contain only letters`;
+    }
+
+    // No error
+    return "";
   };
 
   const validateForm = (formData: any) => {
     // Start with empty errors
     let newErrors = {
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      password: "",
+      firstName: validateName(formData.firstName, "First name"),
+      middleName: validateName(formData.middleName, "Middle name"),
+      lastName: validateName(formData.lastName, "Last name"),
+      password:
+        !formData.password || formData.password.trim() === ""
+          ? "Password is required"
+          : "",
     };
-
-    // Check EACH field independently (no else-if)
-    if (!formData.firstName || formData.firstName.trim() === "") {
-      newErrors.firstName = "First name is required";
-    }
-
-    if (!formData.middleName || formData.middleName.trim() === "") {
-      newErrors.middleName = "Middle name is required";
-    }
-
-    if (!formData.lastName || formData.lastName.trim() === "") {
-      newErrors.lastName = "Last name is required";
-    }
-
-    if (!formData.password || formData.password.trim() === "") {
-      newErrors.password = "Password is required";
-    }
 
     // Set all errors at once
     setIsError(newErrors);
 
     // Check if any errors exist
     const hasErrors = Object.values(newErrors).some((err) => err !== "");
-    console.log(hasErrors);
+    console.log("Has errors:", hasErrors);
+
     if (!hasErrors) {
       console.log("Form valid:", formData);
       setFormData({
@@ -62,6 +73,8 @@ const Signup2 = () => {
         password: "",
       });
       return formData;
+    } else {
+      return null;
     }
   };
 
@@ -81,39 +94,39 @@ const Signup2 = () => {
           type="text"
           id="firstName"
           value={formData.firstName}
-          placeholder="firstName"
+          placeholder="First Name"
           onChange={handleChange}
         />
-        <p>{isError.firstName && isError.firstName}</p>
-        <br />
+        <p style={{ color: "red" }}>{isError.firstName}</p>
+
         <input
           type="text"
           id="middleName"
           value={formData.middleName}
-          placeholder="middleName"
+          placeholder="Middle Name"
           onChange={handleChange}
         />
-        <p>{isError.middleName && isError.middleName}</p>
-        <br />
+        <p style={{ color: "red" }}>{isError.middleName}</p>
+
         <input
           type="text"
           id="lastName"
           value={formData.lastName}
-          placeholder="lastName"
+          placeholder="Last Name"
           onChange={handleChange}
         />
-        <p>{isError.lastName && isError.lastName}</p>
-        <br />
+        <p style={{ color: "red" }}>{isError.lastName}</p>
+
         <input
           type="password"
           id="password"
           value={formData.password}
-          placeholder="password"
+          placeholder="Password"
           onChange={handleChange}
         />
-        <p>{isError.password && isError.password}</p>
-        <br />
-        <button type="submit">submit</button>
+        <p style={{ color: "red" }}>{isError.password}</p>
+
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
