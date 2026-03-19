@@ -1,4 +1,4 @@
-import useWindowInnerWidth from "../hooks/amey/useWindowInnerWidth";
+import useWindowInnerWidth from "../hooks/useWindowInnerWidth";
 
 const WindowInnerWidth = () => {
   const { view, width } = useWindowInnerWidth();

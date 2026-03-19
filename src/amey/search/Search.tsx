@@ -1,33 +1,26 @@
 import { useEffect, useState } from "react";
 import type { GetAllProductsProps, Product } from "../types/shared/api.types";
+import { flatternArray } from "../utils/flattenProducts";
+import useApi from "../hooks/useApi";
 
+const url = "http://localhost:5000/ruchika/api/product/getAllProducts";
+// const method = "GET";
+// const headers = { "Content-Type": "application/json" };
+// const reqBody = {};
 const Search = () => {
+  const { apiData, isLoading, isError, refetch } =
+    useApi<GetAllProductsProps[]>(url);
+
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [deBounce, setDebounce] = useState("");
 
-  const getAllProductsApi = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:5000/rajesheco/api/product/getAllProducts",
-      );
-      if (response.ok) {
-        const data = await response.json();
-        // console.log("original ", data?.result);
-        if (data?.isSuccessful) {
-          let flatProducts = flatternArray(data?.result);
-          // console.log(flatProducts);
-          setProducts(flatProducts);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getAllProductsApi();
-  }, []);
+    if (apiData && apiData.isSuccessful) {
+      const flatProducts = flatternArray(apiData.result);
+      setProducts(flatProducts);
+    }
+  }, [apiData]); // Runs when API returns new data
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -38,19 +31,6 @@ const Search = () => {
       clearTimeout(timer);
     };
   }, [searchTerm]);
-
-  const flatternArray = (result: GetAllProductsProps[]): Product[] => {
-    return result.flatMap((item) => {
-      const currentLevel = (item.products || []) as Product[];
-      const nestedLevel =
-        item.children && item.children.length > 0
-          ? flatternArray(item.children)
-          : [];
-      // return [...currentLevel, ...nestedLevel];
-      let final = currentLevel.concat(nestedLevel);
-      return final;
-    });
-  };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -65,7 +45,7 @@ const Search = () => {
   console.log("search term ", searchTerm);
   // console.log("filtered array ", filteredData);
   // console.log("products ", products);
-  console.log(deBounce);
+  // console.log(deBounce);
   return (
     <div>
       <h2>Search</h2>
@@ -76,14 +56,13 @@ const Search = () => {
         value={searchTerm}
       />
       <div>
-        {
-          deBounce.length > 0 && filteredData.length > 0
-            ? filteredData.map((item) => {
-                return <h2 key={item.id}>{item.title}</h2>;
-              })
-            : ""
-          // <h2>"no products found"</h2>
-        }
+        {deBounce.length > 0 && filteredData.length > 0 ? (
+          filteredData.map((item) => {
+            return <h2 key={item.id}>{item.title}</h2>;
+          })
+        ) : (
+          <h2>"no products found"</h2>
+        )}
       </div>
     </div>
   );

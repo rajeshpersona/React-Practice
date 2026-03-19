@@ -1,6 +1,6 @@
-export interface ApiResponse {
+export interface ApiResponse<T = any> {
   isSuccessful: boolean;
-  result: GetAllProductsProps[];
+  result: T;
   exceptionMessage: string;
   statusCode: number;
 }
