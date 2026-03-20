@@ -5,6 +5,19 @@
 }
 
 body {
-  background-color: black;
-  color: #ddd;
+  background-color: black !important;
+  color: #ddd !important;
+  font-size: 16px;
+}
+::placeholder {
+  font-size: 16px;
+  color: #aaa;
+}
+.error {
+  font-size: 16px;
+  color: red;
+}
+.disabled {
+  background-color: #555555 !important;
+  cursor: not-allowed !important;
 }

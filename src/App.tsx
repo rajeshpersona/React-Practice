@@ -1,3 +1,5 @@
+import Checkout from "./amey/checkout/Checkout";
+import Checkout2 from "./amey/checkout/Checkout2";
 import AmeyCounter from "./amey/counter/AmeyCounter";
 import Filter from "./amey/filters/Filter";
 import Signup from "./amey/forms/Signup";
@@ -16,7 +18,8 @@ const App = () => {
       {/* <WindowInnerWidth /> */}
       {/* <Search /> */}
       {/* <Signup /> */}
-      <Signup3 />
+      {/* <Signup3 /> */}
+      <Checkout2 />
       {/* <Filter /> */}
     </div>
   );
